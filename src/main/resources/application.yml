@@ -1,0 +1,55 @@
+server:
+  port: 8011
+spring:
+  application:
+    name: zuul-apigateway
+  rabbitmq:
+    host:  localhost
+    port:  5672
+    username: guest
+    password: guest
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/usermicroservice
+    username: root
+    password: sumit
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: beans,health,routes,httptrace
+
+api:
+  h2console:
+    url:
+      path: /users-ws/h2-console/**
+  registration:
+    url:
+      path: /users-ws/users
+  login:
+    url:
+      path: /users-ws/users/authenticate
+  users:
+    actuator:
+      url:
+        path: /users-ws/actuator/*
+  zuul:
+    actuator:
+      url:
+        path: /actuator/*
+
+authorization:
+  token:
+    header:
+      name: Authorization
+      prefix: Bearer
+
+token:
+  secret: hfgry463hf746hf573ydh475fhy5739
